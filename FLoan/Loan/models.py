@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import User
 from datetime import date
 
 
@@ -36,6 +36,7 @@ class CreditProduct(models.Model):
 
 
 class Borrower(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     DOB = models.DateField(default=date.today, null=True, blank=True)
@@ -61,6 +62,8 @@ class Loan(models.Model):
     DateOfClose = models.DateField(default=date.today, null=True)
     IsActive = models.BooleanField(default=False)
     TotalToPay = models.FloatField(default=0)
+    Decision = models.CharField(max_length=15, null=True, blank=True)
+    DecisionMadeBy = models.CharField(max_length=200, null=True, blank=True)
 
 
 class Payments(models.Model):
@@ -68,3 +71,7 @@ class Payments(models.Model):
     DateOfPayment = models.DateField()
     PaymentAmount = models.FloatField(default=0)
     FeePaid = models.FloatField(default=0)
+
+
+class LoanOfficer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
