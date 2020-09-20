@@ -33,13 +33,10 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
-
-
-# Register your models here.
 admin.site.register(Loan),
 admin.site.register(CreditProduct),
 admin.site.register(Payments),
 admin.site.register(Fee),
-# admin.site.register(User, UserAdmin)
+
 
 
