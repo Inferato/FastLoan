@@ -3,4 +3,4 @@ from django.db import models
 
 
 class User(AbstractUser):
-    IsLoanOfficer = models.BooleanField(default=False)
+    IsLoanOfficer = models.BooleanField(default=False, verbose_name='Loan Officer')
