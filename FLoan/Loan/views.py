@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from .form import UserForm, SignUpForm
 
 
-def profile(request):
-    pass
+def main_page(request):
+    return render(request, 'Loan/main.html')
 
 
 def signup(request):
@@ -21,7 +21,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('Loan:profile')
+            return redirect('Loan:main_page')
     else:
         form = SignUpForm()
     return render(request, 'Loan/signup.html', {'form': form})
@@ -36,7 +36,7 @@ def signin(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect('Loan:profile')
+                    return redirect('Loan:main_page')
                 else:
                     return HttpResponse('Disabled account')
             else:
